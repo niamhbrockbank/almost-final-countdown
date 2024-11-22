@@ -12,6 +12,7 @@ export default function TimerChallenge({ title, targetTime }) {
   if (timeRemaining <= 0) {
     clearInterval(timer.current);
     setTimeRemaining(targetTime * 1000);
+    dialog.current.open();
   }
 
   function handleStart() {
@@ -22,6 +23,7 @@ export default function TimerChallenge({ title, targetTime }) {
 
   function handleStop() {
     clearInterval(timer.current);
+    dialog.current.open();
   }
 
   return (
@@ -32,11 +34,11 @@ export default function TimerChallenge({ title, targetTime }) {
         <p className="challenge-time">
           {targetTime} second{targetTime > 1 ? "s" : ""}
         </p>
-        <button onClick={timerStarted ? handleStop : handleStart}>
-          {timerStarted ? "Stop" : "Start"} Challenge
+        <button onClick={timerIsActive ? handleStop : handleStart}>
+          {timerIsActive ? "Stop" : "Start"} Challenge
         </button>
-        <p className={timerStarted ? "active" : undefined}>
-          {timerStarted ? "Timer is running" : "Timer inactive"}
+        <p className={timerIsActive ? "active" : undefined}>
+          {timerIsActive ? "Timer is running" : "Timer inactive"}
         </p>
       </section>
     </>
